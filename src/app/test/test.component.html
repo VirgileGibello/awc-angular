@@ -1,0 +1,11 @@
+<awc-stepper>
+  @for (step of steps; track step.label) {
+    <awc-stepper-item label="{{ step.label }}"
+      [attr.active]="step.active === true ? '' : null"
+      [attr.completed]="step.completed === true ? '' : null">
+      {{ step.label }}
+    </awc-stepper-item>
+  } @empty {
+    No steps.
+  }
+</awc-stepper>

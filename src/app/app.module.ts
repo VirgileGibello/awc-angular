@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { setBasePath } from '@agence-adeliom/awc';
+import { TestComponent } from './test/test.component';
+
 setBasePath('/');
 
 // @ts-ignore
@@ -14,7 +16,8 @@ setBasePath('/');
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TestComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
