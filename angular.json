@@ -31,9 +31,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@agence-adeliom/awc/dist/themes/dark.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@agence-adeliom/awc/dist/awc.js"
+            ]
           },
           "configurations": {
             "production": {
