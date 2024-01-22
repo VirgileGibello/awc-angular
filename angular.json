@@ -28,14 +28,11 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {"glob": "@agence-adeliom/awc/dist/assets", "input": "node_modules", "output": "assets"}
             ],
             "styles": [
-              "node_modules/@agence-adeliom/awc/dist/themes/dark.css",
               "src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/@agence-adeliom/awc/dist/awc.js"
             ]
           },
           "configurations": {
