@@ -1,45 +1,55 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Directive, forwardRef } from '@angular/core';
+import {
+  CheckboxControlValueAccessor,
+  DefaultValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Directive({
-  selector:
-    "awc-input, awc-select, awc-checkbox",
   standalone: true,
   providers: [
     {
+      multi: true,
       provide: NG_VALUE_ACCESSOR,
-      useExisting: AWCValueAccessor,
-      multi: true
-    }
+      useExisting: forwardRef(() => AWCDefaultValueAccessor),
+    },
   ],
+  selector: `
+    awc-dropdown[formControlName], awc-dropdown[formControl], awc-dropdown[ngModel],
+    awc-input[formControlName], awc-input[formControl], awc-input[ngModel],
+    awc-textarea[formControlName], awc-textarea[formControl], awc-textarea[ngModel],
+    awc-range[formControlName], awc-range[formControl], awc-range[ngModel],
+    awc-select[formControlName], awc-select[formControl], awc-select[ngModel],
+    awc-radio-button[formControlName], awc-radio-button[formControl], awc-radio-button[ngModel],
+    awc-radio-group[formControlName], awc-radio-group[formControl], awc-radio-group[ngModel],
+  `,
+  host: {
+    // Overwrite the input event, because we only emit awc-input event
+    '(awc-input)': '$any(this)._handleInput($event.target.value)',
+    '(blur)': 'onTouched()',
+    '(compositionstart)': '$any(this)._compositionStart()',
+    '(compositionend)': '$any(this)._compositionEnd($event.target.value)',
+  },
 })
-export class AWCValueAccessor implements ControlValueAccessor {
+export class AWCDefaultValueAccessor extends DefaultValueAccessor {}
 
-  val = "";
-  onChange: any = () => {};
-  onTouch: any = () => {};
-
-  set value(value: string){
-    if(!value) return;
-    this.val = value;
-    this.elRef.nativeElement.value = this.value;
-
-    this.onChange(value);
-    this.onTouch(value);
-  }
-
-  constructor(private elRef : ElementRef) {console.log(this.elRef.nativeElement.value);}
-
-  registerOnChange(fn: any): void {
-
-  }
-
-  registerOnTouched(fn: any): void {
-
-  }
-
-  writeValue(value: string): void {
-    this.val = value;
-    this.elRef.nativeElement.value = value;
-  }
-}
+@Directive({
+  standalone: true,
+  providers: [
+    {
+      multi: true,
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AWCCheckedValueAccessor),
+    },
+  ],
+  selector: `
+    awc-checkbox[formControlName], awc-checkbox[formControl], awc-checkbox[ngModel],
+    awc-switch[formControlName], awc-switch[formControl], awc-switch[ngModel]
+  `,
+  // Overwrite the change event, because we only emit awc-change event
+  host: {
+    '(awc-change)': 'onChange($event.target.checked)',
+    '(blur)': 'onTouched()',
+  },
+})
+export class AWCCheckedValueAccessor extends CheckboxControlValueAccessor {}
