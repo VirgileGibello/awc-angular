@@ -9,3 +9,32 @@
     No steps.
   }
 </awc-stepper>
+
+<div>
+  <form [formGroup]="form" (submit)="submitForm()">
+    <awc-input
+      formControlName="name"
+      name="name"
+      label="Nom"
+      required
+    >
+    </awc-input>
+    <awc-select
+      formControlName="type"
+      name="type"
+      label="Type"
+      clearable=""
+      required>
+      @for (option of types; track option.value) {
+        <awc-option value="{{ option.value }}">{{ option.label }}</awc-option>
+      }
+    </awc-select>
+    <awc-checkbox
+      formControlName="important"
+      name="important"
+      required>
+      Check me before submitting
+    </awc-checkbox>
+    <awc-button type="submit" variant="primary">Submit</awc-button>
+  </form>
+</div>
