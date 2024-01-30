@@ -1,11 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AWCValueAccessor } from '../awc-value-accessor.directive';
 
 @Component({
   selector: 'test',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, AWCValueAccessor],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
   selector:
-    "awc-input, awc-select, awc-option, awc-checkbox",
+    "awc-input, awc-select, awc-checkbox",
   standalone: true,
   providers: [
     {
@@ -15,47 +15,31 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class AWCValueAccessor implements ControlValueAccessor {
 
-  constructor(private element: ElementRef, private renderer: Renderer2) {
-    this.onChange = () => {
-    };
-    this.onTouched = () => {
-    };
-  }
+  val = "";
+  onChange: any = () => {};
+  onTouch: any = () => {};
 
-  onChange: (value: string) => void;
-  onTouched: () => void;
+  set value(value: string){
+    if(!value) return;
+    this.val = value;
+    this.elRef.nativeElement.value = this.value;
 
-  writeValue(value: string) {
-    this.renderer.setProperty(this.element.nativeElement, "value", value);
-  }
-
-  @HostListener("onChange", ["$event.detail"])
-  _handleIllyChange(value: string) {
     this.onChange(value);
+    this.onTouch(value);
   }
 
-  @HostListener("onBlur", ["$event.target"])
-  _handleBlurEvent(el: any) {
-    this.onTouched();
+  constructor(private elRef : ElementRef) {console.log(this.elRef.nativeElement.value);}
+
+  registerOnChange(fn: any): void {
+
   }
 
-  registerOnChange(fn: (value: string) => void) {
-    this.onChange = value => {
-      fn(value);
-    };
+  registerOnTouched(fn: any): void {
+
   }
 
-  registerOnTouched(fn: () => void) {
-    this.onTouched = () => {
-      fn();
-    };
-  }
-
-  setDisabledState(isDisabled: boolean) {
-    this.renderer.setProperty(
-      this.element.nativeElement,
-      "disabled",
-      isDisabled
-    );
+  writeValue(value: string): void {
+    this.val = value;
+    this.elRef.nativeElement.value = value;
   }
 }
