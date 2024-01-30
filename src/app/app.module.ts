@@ -17,9 +17,8 @@ setBasePath('/');
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TestComponent,
+    TestComponent
   ],
-  providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
