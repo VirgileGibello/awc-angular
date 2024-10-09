@@ -2,6 +2,55 @@
 @use "./themes/light";
 @use "./themes/dark";
 
+@import '@agence-adeliom/awc/dist/themes/light.css';
+@import '@agence-adeliom/awc/dist/themes/bootstrap.css';
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+#table .table-tree--header::part(label){
+  font-weight: bold;
+  border: none;
+}
+table tr th td {
+  border: 1px solid red;
+}
+#table ::part(item) {
+  align-items: flex-end;
+}
+#table ::part(item-expanded) ::part(label) {
+  margin-left: 24px;
+}
+
+#table ::part(label) {
+  display: table;
+  width: 100%;
+  border: 1px solid red;
+  border-collapse: collapse;
+}
+#table ::part(label) tr {
+  display: table-row;
+  width: 100%;
+}
+#table ::part(label) td, #table ::part(label) th {
+  display: table-cell;
+}
+#table tr.level-0 td:first-child {
+  width: 300px;
+}
+#table tr.level-1 td:first-child {
+  width: 280px;
+}
+#table tr.level-2 td:first-child {
+  width: 260px;
+}
+.double-cell {
+  width: 200px;
+}
+
+@layer components {
+  .tw-card {
+    @apply py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+  }
+}

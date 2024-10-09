@@ -21,7 +21,7 @@ import {
   imports: [
     ReactiveFormsModule,
     AWCDefaultValueAccessor,
-    AWCCheckedValueAccessor,
+    AWCCheckedValueAccessor
   ],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
@@ -50,5 +50,11 @@ export class TestComponent implements OnInit {
 
   public submitForm(): void {
     console.log(this.form.controls);
+  }
+
+  public testClick($event: MouseEvent): void {
+    if ($event) {
+      console.log('clicked : ', $event);
+    }
   }
 }

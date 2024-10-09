@@ -1,14 +1,121 @@
-<router-outlet></router-outlet>
+<section class="w-[1400px] mx-auto">
+    <div class="bg-red-500 p-4 flex gap-4 items-center">
+        <awc-button size="small">Click me</awc-button>
+        <awc-button size="medium">Click me</awc-button>
+        <awc-button size="large">Click me</awc-button>
+    </div>
+    <awc-badge>Badge</awc-badge>
 
-<div class="bg-red-500 p-4 flex gap-4 items-center">
-    <awc-button size="small">Click me</awc-button>
-    <awc-button size="medium">Click me</awc-button>
-    <awc-button size="large">Click me</awc-button>
-</div>
-<awc-badge>Badge</awc-badge>
+    <awc-input type="text" [attr.readonly]="clickedStep"></awc-input>
 
-<awc-input></awc-input>
+    <awc-icon name="0-square-fill"></awc-icon>
 
-<awc-icon name="0-square-fill"></awc-icon>
+    <awc-alert open="{{ clickedStep }}" closable>
+        <strong>Click detected</strong>
+        <br />
+        You clicked on the "{{ clickedStep }}" button.
+        <awc-icon slot="icon" name="info-circle"></awc-icon>
+    </awc-alert>
 
-<test [steps]="getSteps()"></test>
+    <ul class="flex justify-center gap-4 items-center">
+        @for (step of getSteps(); track step.label) {
+            <li>
+                <awc-button (click)="handleStepClick(step.label)" size="{{ step.size }}" disabled="{{ step.active ? 'disabled' : '' }}">
+                    {{ step.label }}
+                </awc-button>
+            </li>
+        }
+    </ul>
+    <awc-tree class="table-tree">
+    <table id="table" class="w-full ">
+        <tbody>
+            <awc-tree-item class="table-tree--header tw-card">
+                <tr class="header level-0 text-bold border-0">
+                    <td>Intitulé</td>
+                    <td>Intitulé</td>
+                    <td class="double-cell">Intitulé</td>
+                    <td>Intitulé</td>
+                    <td>Intitulé</td>
+                    <td>Intitulé</td>
+                    <td>Intitulé</td>
+                </tr>
+            </awc-tree-item>
+            <awc-tree-item class="table-tree--item">
+                <tr class="level-0">
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td class="double-cell">lorem ipsum</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                </tr>
+                <awc-tree-item>
+                    <tr class="level-1">
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td class="double-cell">lorem ipsum dolot</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td class="double-cell">lorem</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <awc-tree-item>
+                        <tr class="level-2">
+                            <td>TEST</td>
+                            <td>TEST</td>
+                            <td class="double-cell">lorem dgdfgdf sdfgf dff ipsum</td>
+                            <td>TEST</td>
+                            <td>TEST</td>
+                            <td>TEST</td>
+                            <td>TEST</td>
+                        </tr>
+                    </awc-tree-item>
+                </awc-tree-item>
+            </awc-tree-item>
+            <awc-tree-item class="table-tree--item">
+                <tr class="level-0">
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td class="double-cell">lorem ipsum</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                </tr>
+                <awc-tree-item>
+                    <tr class="level-1">
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td class="double-cell">lorem ipsum dolot</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td class="double-cell">lorem</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                </awc-tree-item>
+            </awc-tree-item>
+
+        </tbody>
+    </table>
+    </awc-tree>
+</section>
+

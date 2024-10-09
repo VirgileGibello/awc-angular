@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Post } from './interfaces/post.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,16 +8,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 
-export class AppComponent {
-  title = 'test-app';
+export class AppComponent implements OnInit{
+  protected clickedStep: null|string;
+  private route = inject(ActivatedRoute);
+  post: Post = {} as Post;
+
+  constructor() {
+    this.clickedStep = null;
+  }
+
+  public ngOnInit(): void {
+    console.log(this.route.snapshot.data);
+  }
 
   public getSteps(): any {
     return [
-      { label: 'Step 1', active: false, completed: true },
-      { label: 'Step 2', active: false, completed: true },
-      { label: 'Step 3', active: true, completed: false },
-      { label: 'Step 4', active: false, completed: false },
-      { label: 'Step 5', active: false, completed: false },
+      { label: 'Step 1', active: false, size: 'medium' },
+      { label: 'Step 2', active: false, size: 'large' },
+      { label: 'Step 3', active: true, size: 'small' },
+      { label: 'Step 4', active: false, size: 'medium' },
+      { label: 'Step 5', active: false, size: 'small' },
     ];
+  }
+
+  public handleStepClick(label: string): any {
+    this.clickedStep = label;
   }
 }

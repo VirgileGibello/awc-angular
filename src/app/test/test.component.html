@@ -19,6 +19,10 @@
       required
     >
     </awc-input>
+    @if (form.controls['name'].touched && form.controls['name'].errors?.['required']) {
+      <awc-alert open variant="danger">Name is required.</awc-alert>
+    }
+
     <awc-select
       formControlName="type"
       name="type"
@@ -35,6 +39,15 @@
       required>
       Check me before submitting
     </awc-checkbox>
-    <awc-button type="submit" variant="primary">Submit</awc-button>
+    <awc-button type="submit" variant="primary"><awc-icon ></awc-icon>Submit</awc-button>
   </form>
+  <awc-menu>
+    <awc-menu-item class="link" value="undo">Undo<a href="/" target="_blank">New tab</a></awc-menu-item>
+    <awc-menu-item class="link" value="redo">Redo</awc-menu-item>
+    <awc-divider></awc-divider>
+    <awc-menu-item class="link" value="cut">Cut</awc-menu-item>
+    <awc-menu-item class="link" value="copy">Copy</awc-menu-item>
+    <awc-menu-item class="link" value="paste">Paste</awc-menu-item>
+    <awc-menu-item class="link" value="delete">Delete</awc-menu-item>
+  </awc-menu>
 </div>
